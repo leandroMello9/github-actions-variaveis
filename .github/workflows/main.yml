@@ -1,11 +1,36 @@
 name: Como usar variaveis de ambiente
 on:
   workflow_dispatch:
+env: 
+  ENV_WORKFLOW: "Valor WorkFlow" #a nivel workflow
 jobs:
-  env:
+  test-env:
     runs-on: ubuntu-latest
+    env:
+      ENV_JOB: "Valor JOB - test-env" #a nivel do JOB
     steps:
       - name: Execução
+        env:
+          ENV_ACTION: "Valor ACTION - Execução" #a nivel de action
         run: |
-         echo "Valor XPTO"
-      
+         echo "$ENV_WORKFLOW"
+         echo "$ENV_JOB"
+         echo "$ENV_ACTION"
+      - name: Execução 2
+        env:
+          ENV_ACTION: "Valor ACTION - Segunda Execução" #a nivel de action
+        run: |
+         echo "$ENV_WORKFLOW"
+         echo "$ENV_JOB"
+         echo "$ENV_ACTION"
+  test-env-2:
+    runs-on: ubuntu-latest
+    env:
+      ENV_JOB: "Valor JOB - test-env-2" #a nivel do JOB
+    steps:
+      - name: Execução
+        env:
+          ENV_ACTION: "Valor ACTION - Execução 2" #a nivel de action
+        run: |
+         echo "$ENV_WORKFLOW"
+         echo "$ENV_JOB"
